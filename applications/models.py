@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.db import models
 
 
@@ -77,7 +78,7 @@ class Application(models.Model):
 
         if income_to_debt_ok and collateral_value_ok:
             self.status = "approved"
-            self.proposed_loan_amount = round(self.collateral.estimated_value * 0.7, 2)
+            self.proposed_loan_amount = round(self.collateral.estimated_value * Decimal("0.7"), 2)
         else:
             self.status = "rejected"
             self.proposed_loan_amount = None
