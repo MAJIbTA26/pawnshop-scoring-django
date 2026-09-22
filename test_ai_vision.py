@@ -6,7 +6,7 @@ import pytest
 from applications.ai_vision import CollateralEstimate, analyze_collateral_photo
 
 
-def test_analyze_collateral_photo_raises_on_missing_file():
+def test_analyze_collateral_photo_raises_on_missing_file() -> None:
     """Якщо шлях до фото не існує — має піднятися FileNotFoundError, а не впасти мовчки."""
     with pytest.raises(FileNotFoundError):
         analyze_collateral_photo("nonexistent_photo.jpg")
@@ -16,7 +16,7 @@ def test_analyze_collateral_photo_raises_on_missing_file():
     not os.environ.get("GEMINI_API_KEY"),
     reason="Потрібен GEMINI_API_KEY у .env для реального виклику Gemini API",
 )
-def test_analyze_collateral_photo_returns_structured_estimate():
+def test_analyze_collateral_photo_returns_structured_estimate() -> None:
     """Реальний виклик Gemini Vision має повернути коректно заповнений CollateralEstimate."""
     photo_path = os.path.join("collateral_photos", os.listdir("collateral_photos")[0])
 
