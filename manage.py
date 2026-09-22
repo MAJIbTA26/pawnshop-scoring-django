@@ -1,15 +1,20 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+import logging
 import os
 import sys
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 
-def main():
+
+def main() -> None:
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pawnshop_scoring.settings')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pawnshop_scoring.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
+        logger.error("Не вдалося імпортувати Django: %s", exc)
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "
             "available on your PYTHONPATH environment variable? Did you "
@@ -18,5 +23,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
